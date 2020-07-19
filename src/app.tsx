@@ -17,6 +17,16 @@ const App: Component = () => {
           <Route path="/jwt-decoder" children={<JWTDecoder />} />
         </Router>
       </main>
+      <footer class="fixed py-6 bottom-0 container w-full px-4 sm:px-6 transform -translate-x-1/2 left-1/2">
+        <a
+          href="https://github.com/amoutonbrady/url-inspector"
+          target="_blank"
+          rel="noopener"
+          class="text-pink-300 hover:underline"
+        >
+          Source code
+        </a>
+      </footer>
     </>
   );
 };
