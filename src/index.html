@@ -11,7 +11,23 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root" class="min-h-screen"></div>
 
-    <script src="./public/sw.js" type="module"></script>
     <script src="./main.ts" type="module"></script>
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker
+            .register("/sw.js")
+            .then(() => {
+              console.log("✔ Application is now available offline");
+            })
+            .catch((registrationError) => {
+              console.log(
+                "❌ Application couldn't be registered offline",
+                registrationError
+              );
+            });
+        });
+      }
+    </script>
   </body>
 </html>
