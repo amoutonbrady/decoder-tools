@@ -7,6 +7,9 @@ const config: UserConfig = {
   serviceWorker: false,
   plugins: [solidPlugin()],
   enableEsbuild: false,
+  rollupInputOptions: {
+    external: ["https://cdn.jsdelivr.net/npm/@pwabuilder/pwaupdate"],
+  },
 };
 
 export default config;
