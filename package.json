@@ -1,0 +1,22 @@
+{
+  "name": "vite-template-solid",
+  "version": "0.0.0",
+  "description": "My solid + vite project + ts",
+  "scripts": {
+    "start": "vite",
+    "build": "vite build"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "@amoutonbrady/vite-plugin-solid": "^0.0.3",
+    "@tailwindcss/ui": "^0.3.1",
+    "@types/jwt-decode": "^2.2.1",
+    "tailwindcss": "^1.5.1",
+    "vite": "^1.0.0-rc.1"
+  },
+  "dependencies": {
+    "@amoutonbrady/solid-tiny-router": "^0.0.8",
+    "jwt-decode": "^2.2.0",
+    "solid-js": "^0.18.14"
+  }
+}
