@@ -1,4 +1,4 @@
-import { Component, createSignal, onCleanup } from "solid-js";
+import { Component, createEffect, createSignal, onCleanup } from "solid-js";
 
 type Event = InputEvent & {
   currentTarget: HTMLTextAreaElement;
@@ -34,7 +34,7 @@ const Base64Decoder: Component = () => {
   let originalRef: HTMLTextAreaElement;
   let encodedRef: HTMLTextAreaElement;
 
-  setTimeout(() => useSyncHeight(originalRef, encodedRef));
+  createEffect(() => useSyncHeight(originalRef, encodedRef));
 
   const handleOriginal = (e: Event) => {
     setOriginal(e.target.value);
