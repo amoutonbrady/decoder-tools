@@ -44,7 +44,7 @@ const JWTDecoder: Component = () => {
         <p class="block text-sm font-medium leading-5 text-gray-200">Headers</p>
         <code
           style="min-height: 85px"
-          class="mt-1 form-textarea text-gray-200 bg-gray-800 border-0 block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+          class="whitespace-pre-wrap mt-1 form-textarea text-gray-200 bg-gray-800 border-0 block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
         >
           <Show when={!jwt.error && jwt.headers}>
             <pre>{JSON.stringify(jwt.headers, null, 4)}</pre>
@@ -55,7 +55,7 @@ const JWTDecoder: Component = () => {
         </p>
         <code
           style="min-height: 85px"
-          class="mt-1 form-textarea text-gray-200 bg-gray-800 border-0 block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+          class="whitespace-pre-wrap mt-1 form-textarea text-gray-200 bg-gray-800 border-0 block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
         >
           <Show when={!jwt.error && jwt.payload}>
             <pre>{JSON.stringify(jwt.payload, null, 4)}</pre>

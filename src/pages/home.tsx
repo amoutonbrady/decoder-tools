@@ -76,7 +76,7 @@ const Home: Component = () => {
               <dt class="text-sm leading-5 font-medium text-gray-300">
                 Is the URL secured?
               </dt>
-              <dd class="mt-1 text-sm leading-5 text-gray-100 sm:mt-0 sm:col-span-2 font-semibold">
+              <dd class="whitespace-pre-wrap mt-1 text-sm leading-5 text-gray-100 sm:mt-0 sm:col-span-2 font-semibold">
                 <span
                   class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium leading-4 uppercase"
                   classList={{
@@ -92,7 +92,7 @@ const Home: Component = () => {
               <dt class="text-sm leading-5 font-medium text-gray-300">
                 Hostname
               </dt>
-              <dd class="mt-1 text-sm leading-5 text-gray-100 sm:mt-0 sm:col-span-2">
+              <dd class="whitespace-pre-wrap mt-1 text-sm leading-5 text-gray-100 sm:mt-0 sm:col-span-2">
                 {introspect.host}
               </dd>
             </div>
@@ -101,7 +101,7 @@ const Home: Component = () => {
                 <dt class="text-sm leading-5 font-medium text-gray-300">
                   Pathname
                 </dt>
-                <dd class="mt-1 text-sm leading-5 text-gray-100 sm:mt-0 sm:col-span-2">
+                <dd class="whitespace-pre-wrap mt-1 text-sm leading-5 text-gray-100 sm:mt-0 sm:col-span-2">
                   {introspect.path}
                 </dd>
               </div>
@@ -111,7 +111,7 @@ const Home: Component = () => {
                 <dt class="text-sm leading-5 font-medium text-gray-300">
                   Hash
                 </dt>
-                <dd class="mt-1 text-sm leading-5 text-gray-100 sm:mt-0 sm:col-span-2">
+                <dd class="whitespace-pre-wrap mt-1 text-sm leading-5 text-gray-100 sm:mt-0 sm:col-span-2">
                   {introspect.hash}
                 </dd>
               </div>
@@ -121,7 +121,7 @@ const Home: Component = () => {
                 <dt class="text-sm leading-5 font-medium text-gray-300">
                   Query parameters
                 </dt>
-                <dd class="mt-1 text-sm leading-5 text-gray-100 sm:mt-0 sm:col-span-2">
+                <dd class="whitespace-pre-wrap mt-1 text-sm leading-5 text-gray-100 sm:mt-0 sm:col-span-2">
                   <div class="overflow-x-auto border-2 border-gray-900 align-middle inline-block min-w-full overflow-hidden sm:rounded-lg">
                     <table class="min-w-full">
                       <thead>
