@@ -2,26 +2,26 @@
 
 Small set of tools to inspect an URL (a GUI for `new URL(...)`), decode/encode base64 (a GUI for `atob(...)` & `btoa(...)`) and a JWT decoder.
 
-Built with [solid](https://github.com/ryansolid/solid) and [vite](https://github.com/vitejs/vite)
+Built with [solid](https://github.com/ryansolid/solid) and parcel 2
 
 ## Usage
 
 ```bash
-$ npm install # or pnpm install or yarn install
+$ yarn
 ```
 
 ## Available Scripts
 
 In the project directory, you can run:
 
-### `npm start`
+### `yarn dev`
 
 Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Open [http://localhost:1234](http://localhost:1234) to view it in the browser.
 
 The page will reload if you make edits.<br>
 
-### `npm run build`
+### `npm build`
 
 Builds the app for production to the `dist` folder.<br>
 It correctly bundles Solid in production mode and optimizes the build for the best performance.

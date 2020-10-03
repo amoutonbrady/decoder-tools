@@ -2,7 +2,7 @@ import { Component, For } from "solid-js";
 import { Link, useRouter } from "@amoutonbrady/solid-tiny-router";
 
 const Nav: Component = () => {
-  const [store, { push }] = useRouter();
+  const [router, { push }] = useRouter();
   const links = [
     {
       slug: "",
@@ -25,7 +25,7 @@ const Nav: Component = () => {
           aria-label="Selected tab"
           class="form-select block w-full"
           onChange={(e) => push(e.target.value)}
-          value={store.currentRoute.pathname}
+          value={router.currentRoute.pathname}
         >
           <For each={links}>
             {(link) => <option value={`/${link.slug}`}>{link.name}</option>}
@@ -43,9 +43,9 @@ const Nav: Component = () => {
                   class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm leading-5 focus:outline-none focus:bg-opacity-25 focus:bg-pink-900"
                   classList={{
                     "border-pink-500 text-pink-400":
-                      store.currentRoute.pathname === `/${link.slug}`,
+                      router.currentRoute.pathname === `/${link.slug}`,
                     "border-transparent text-gray-100 hover:text-gray-200 hover:border-gray-300":
-                      store.currentRoute.pathname !== `/${link.slug}`,
+                      router.currentRoute.pathname !== `/${link.slug}`,
                   }}
                 >
                   {link.name}

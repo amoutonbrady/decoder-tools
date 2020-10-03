@@ -3,21 +3,33 @@
   "version": "0.0.0",
   "description": "My solid + vite project + ts",
   "scripts": {
-    "start": "vite",
-    "build": "vite build && workbox generateSW workbox-config.js"
+    "dev": "parcel src/index.html",
+    "copy": "cpy '.' ../../dist --cwd=src/public --parents",
+    "build": "parcel build src/index.html && yarn copy && workbox generateSW workbox-config.js"
   },
   "license": "ISC",
   "devDependencies": {
-    "@amoutonbrady/vite-plugin-solid": "^0.0.3",
-    "@tailwindcss/ui": "^0.3.1",
+    "@amoutonbrady/vite-plugin-solid": "^0.2.0",
+    "@babel/core": "^7.11.6",
+    "@babel/preset-typescript": "^7.10.4",
+    "@parcel/config-default": "nightly",
+    "@tailwindcss/ui": "^0.6.2",
     "@types/jwt-decode": "^2.2.1",
-    "tailwindcss": "^1.5.1",
-    "vite": "^1.0.0-rc.1",
-    "workbox-cli": "^5.1.3"
+    "autoprefixer": "^9",
+    "babel-preset-solid": "^0.20.2",
+    "cpy-cli": "^3.1.1",
+    "lodash": "^4.17.20",
+    "parcel": "nightly",
+    "supports-color": "^7.2.0",
+    "tailwindcss": "^1.8.10",
+    "typescript": "^4.0.3",
+    "vite": "^1.0.0-rc.4",
+    "workbox-cli": "^5.1.4"
   },
   "dependencies": {
-    "@amoutonbrady/solid-tiny-router": "^0.0.8",
-    "jwt-decode": "^2.2.0",
-    "solid-js": "^0.18.14"
+    "@amoutonbrady/solid-tiny-router": "^0.4.0",
+    "jwt-decode": "^3.0.0",
+    "register-service-worker": "^1.7.1",
+    "solid-js": "^0.20.2"
   }
 }
