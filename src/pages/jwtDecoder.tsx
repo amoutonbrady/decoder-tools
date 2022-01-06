@@ -1,19 +1,21 @@
-import { Component, createState, Show } from "solid-js";
 import decode from "jwt-decode";
+import { Component, Show } from "solid-js";
+import { createStore } from 'solid-js/store';
+
 import { Alert } from "../components/alert";
 
 const JWTDecoder: Component = () => {
-  const [jwt, setJwt] = createState({
+  const [jwt, setJwt] = createStore({
     headers: null,
     payload: null,
     error: "",
   });
 
-  const handleInput = (e: Event & { target: HTMLTextAreaElement }) => {
+  const handleInput = (e: Event & { currentTarget: HTMLTextAreaElement }) => {
     try {
-      if (!e.target.value) return setJwt("error", "");
-      const headers = decode<any>(e.target.value, { header: true });
-      const payload = decode<any>(e.target.value);
+      if (!e.currentTarget.value) return setJwt("error", "");
+      const headers = decode<any>(e.currentTarget.value, { header: true });
+      const payload = decode<any>(e.currentTarget.value);
 
       setJwt({ headers, payload, error: "" });
     } catch (e) {

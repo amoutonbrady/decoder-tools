@@ -1,4 +1,5 @@
-import { Component, createSignal, createState, Show, For } from "solid-js";
+import { Component, createSignal, Show, For } from "solid-js";
+import { createStore } from "solid-js/store";
 
 const validateUrl = (url: string): [Error | null, URL | null] => {
   try {
@@ -11,7 +12,7 @@ const validateUrl = (url: string): [Error | null, URL | null] => {
 const Home: Component = () => {
   const [url, setUrl] = createSignal("");
   const [error, setError] = createSignal("");
-  const [introspect, setIntrospect] = createState({
+  const [introspect, setIntrospect] = createStore({
     parsed: false,
     query: null,
     secure: true,
@@ -19,10 +20,6 @@ const Home: Component = () => {
     host: "",
     path: "",
   });
-
-  const handleInput = (e: Event & { target: HTMLInputElement }) => {
-    setUrl(e.target.value);
-  };
 
   const handleSubmit = (e: Event) => {
     e.preventDefault();
@@ -50,16 +47,18 @@ const Home: Component = () => {
         <label for="url" class="sr-only">
           Enter your url
         </label>
+
         <div class="relative rounded-md shadow-sm flex-1">
           <input
             id="url"
             type="url"
-            onInput={handleInput}
+            onInput={(e) => setUrl(e.currentTarget.value)}
             value={url()}
             placeholder="https://google.com/"
             class="text-lg leading-6 font-medium text-gray-100 form-input border-0 block w-full sm:text-sm sm:leading-5 bg-gray-900"
           />
         </div>
+
         <span class="inline-flex rounded-md shadow-sm ml-4">
           <button
             type="submit"
@@ -69,6 +68,7 @@ const Home: Component = () => {
           </button>
         </span>
       </form>
+
       <Show when={introspect.parsed}>
         <div class="px-4 py-5 sm:p-0">
           <dl>
@@ -121,6 +121,7 @@ const Home: Component = () => {
                 <dt class="text-sm leading-5 font-medium text-gray-300">
                   Query parameters
                 </dt>
+
                 <dd class="whitespace-pre-wrap mt-1 text-sm leading-5 text-gray-100 sm:mt-0 sm:col-span-2">
                   <div class="overflow-x-auto border-2 border-gray-900 align-middle inline-block min-w-full overflow-hidden sm:rounded-lg">
                     <table class="min-w-full">
@@ -141,7 +142,7 @@ const Home: Component = () => {
                               <td class="px-6 py-4 whitespace-no-wrap border-t-2 border-gray-900 text-sm leading-5 font-medium text-gray-100">
                                 {decodeURI(query)}
                               </td>
-                              <td class="px-6 py-4 whitespace-no-wrap border-t-2 border-gray-900 text-sm leading-5 text-gray-300">
+                              <td class="px-6 py-4 break-all border-t-2 border-gray-900 text-sm leading-5 text-gray-300">
                                 {decodeURI(value)}
                               </td>
                             </tr>

@@ -4,6 +4,7 @@
     "module": "ESNext",
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
+    "jsxImportSource": "solid-js",
     "esModuleInterop": true,
     "jsx": "preserve",
     "types": ["vite"]
