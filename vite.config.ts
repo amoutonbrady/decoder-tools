@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [
     solidPlugin(),
     VitePWA({
-      registerType: "autoUpdate",
+      registerType: "prompt",
       includeAssets: ["favicon.svg", "robots.txt", "safari-pinned-tab.svg"],
       manifest: {
         dir: "ltr",
