@@ -1,7 +1,7 @@
-import { Component, For } from "solid-js";
-import { Link, useNavigate, useLocation } from "solid-app-router";
+import { For } from "solid-js";
+import { Link, useNavigate, useLocation } from "@solidjs/router";
 
-const Nav: Component = () => {
+function Nav() {
   const navigate = useNavigate();
   const location = useLocation();
 

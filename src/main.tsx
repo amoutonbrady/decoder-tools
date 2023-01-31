@@ -1,5 +1,5 @@
 import { render } from "solid-js/web";
-import { Router } from "solid-app-router";
+import { Router } from "@solidjs/router";
 
 import "./main.css";
 import App from "./app";
