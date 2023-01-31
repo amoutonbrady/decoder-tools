@@ -20,7 +20,7 @@ const App: Component = () => {
         </Routes>
       </main>
 
-      <footer class="fixed py-6 bottom-0 container w-full px-4 sm:px-6 transform -translate-x-1/2 left-1/2">
+      <footer class="fixed py-6 bottom-0 container w-full px-4 sm:px-6 transform flex justify-center -translate-x-1/2 left-1/2">
         <a
           href="https://github.com/amoutonbrady/url-inspector"
           target="_blank"
