@@ -1,6 +1,6 @@
-import { Component } from "solid-js";
+import type { ParentProps } from "solid-js";
 
-export const Alert: Component = (props) => {
+export function Alert(props: ParentProps) {
   return (
     <div class="fixed bottom-10 right-10 z-50 bg-red-50 border-l-4 border-red-400 p-4">
       <div class="flex">

@@ -1,11 +1,11 @@
-import { Component, createEffect, createSignal, onCleanup } from "solid-js";
+import { createEffect, createSignal, onCleanup } from "solid-js";
 
 type Event = InputEvent & {
-  currentTarget: HTMLTextAreaElement;
   target: HTMLTextAreaElement;
+  currentTarget: HTMLTextAreaElement;
 };
 
-const useSyncHeight = (el1: HTMLElement, el2: HTMLElement) => {
+function useSyncHeight(el1: HTMLElement, el2: HTMLElement) {
   const obs1 = new MutationObserver(
     () => (el1.style.height = el2.offsetHeight + "px")
   );
@@ -28,30 +28,37 @@ const useSyncHeight = (el1: HTMLElement, el2: HTMLElement) => {
   });
 };
 
-const Base64Decoder: Component = () => {
-  const [original, setOriginal] = createSignal("");
-  const [encoded, setEncoded] = createSignal("");
-  let originalRef: HTMLTextAreaElement;
+function Base64Decoder() {
   let encodedRef: HTMLTextAreaElement;
+  let originalRef: HTMLTextAreaElement;
+
+  const [encoded, setEncoded] = createSignal('');
+  const [original, setOriginal] = createSignal('');
 
   createEffect(() => useSyncHeight(originalRef, encodedRef));
 
-  const handleOriginal = (e: Event) => {
-    setOriginal(e.target.value);
-    setEncoded(btoa(e.target.value));
+  function handleOriginal(event: Event) {
+    const original = event.target.value;
+    const encoded = btoa(event.target.value);
+
+    setEncoded(encoded);
+    setOriginal(original);
   };
 
-  const handleEncoded = (e: Event) => {
-    setEncoded(e.target.value);
-    setOriginal(atob(e.target.value));
+  function handleEncoded(event: Event) {
+    const encoded = event.target.value;
+    const original = atob(event.target.value);
+
+    setEncoded(encoded);
+    setOriginal(original);
   };
 
   return (
-    <div class="mt-6 grid grid-cols-1 row-gap-6 col-gap-4 sm:grid-cols-6">
+    <div class="mt-6 grid grid-cols-1 row-gap-6 col-gap-4 sm:grid-cols-6 space-x-2">
       <div class="sm:col-span-3">
         <label
           for="original"
-          class="block text-sm font-medium leading-5 text-gray-200"
+          class="block text-sm py-2 font-medium text-center leading-5 text-gray-200"
         >
           Original text
         </label>
@@ -61,7 +68,7 @@ const Base64Decoder: Component = () => {
             rows="10"
             value={original()}
             onInput={handleOriginal}
-            class="mt-1 form-textarea text-gray-200 bg-gray-800 border-0 block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+            class="mt-1 form-textarea font-mono text-gray-200 bg-gray-800 border-0 block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
             ref={originalRef}
           ></textarea>
         </div>
@@ -70,7 +77,7 @@ const Base64Decoder: Component = () => {
       <div class="sm:col-span-3">
         <label
           for="encoded"
-          class="block text-sm font-medium leading-5 text-gray-200"
+          class="block text-sm py-2 font-medium text-center leading-5 text-gray-200"
         >
           Base64 encoded text
         </label>
@@ -80,7 +87,7 @@ const Base64Decoder: Component = () => {
             rows="10"
             value={encoded()}
             onInput={handleEncoded}
-            class="mt-1 form-textarea text-gray-200 bg-gray-800 border-0 block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+            class="mt-1 form-textarea font-mono text-gray-200 bg-gray-800 border-0 block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
             ref={encodedRef}
           ></textarea>
         </div>

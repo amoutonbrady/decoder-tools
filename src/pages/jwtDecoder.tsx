@@ -1,26 +1,28 @@
 import decode from "jwt-decode";
-import { Component, Show } from "solid-js";
+import { Show } from "solid-js";
 import { createStore } from 'solid-js/store';
 
 import { Alert } from "../components/alert";
 
-const JWTDecoder: Component = () => {
+function JWTDecoder() {
   const [jwt, setJwt] = createStore({
+    error: "",
     headers: null,
     payload: null,
-    error: "",
   });
 
-  const handleInput = (e: Event & { currentTarget: HTMLTextAreaElement }) => {
+  function handleInput(event: Event & { currentTarget: HTMLTextAreaElement }) {
     try {
-      if (!e.currentTarget.value) return setJwt("error", "");
-      const headers = decode<any>(e.currentTarget.value, { header: true });
-      const payload = decode<any>(e.currentTarget.value);
+      const jwt = event.currentTarget.value;
+      if (!jwt) return setJwt("error", "");
 
-      setJwt({ headers, payload, error: "" });
+      const headers = decode<any>(jwt, { header: true });
+      const payload = decode<any>(jwt);
+
+      return setJwt({ headers, payload, error: "" });
     } catch (e) {
       console.log(e.message);
-      setJwt("error", e.message);
+      return setJwt("error", e.message);
     }
   };
 
@@ -42,6 +44,7 @@ const JWTDecoder: Component = () => {
           ></textarea>
         </div>
       </div>
+
       <aside class="col-start-3 row-start-1 mt-4 sm:mt-0">
         <p class="block text-sm font-medium leading-5 text-gray-200">Headers</p>
         <code

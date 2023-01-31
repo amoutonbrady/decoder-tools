@@ -1,7 +1,8 @@
-import { Component, createSignal, Show, For } from "solid-js";
 import { createStore } from "solid-js/store";
+import { createSignal, Show, For, onMount } from "solid-js";
+import { useSearchParams } from "@solidjs/router";
 
-const validateUrl = (url: string): [Error | null, URL | null] => {
+function validateUrl(url: string): [Error | null, URL | null] {
   try {
     return [null, new URL(url)];
   } catch (e) {
@@ -9,37 +10,55 @@ const validateUrl = (url: string): [Error | null, URL | null] => {
   }
 };
 
-const Home: Component = () => {
-  const [url, setUrl] = createSignal("");
-  const [error, setError] = createSignal("");
+function Home() {
+  const [searchParams, setSearchParams] = useSearchParams<{ url: string }>();
+
+  const [_error, setError] = createSignal("");
   const [introspect, setIntrospect] = createStore({
-    parsed: false,
-    query: null,
-    secure: true,
     hash: "",
     host: "",
     path: "",
+    query: null,
+    secure: true,
+    parsed: false,
   });
 
-  const handleSubmit = (e: Event) => {
-    e.preventDefault();
-    setError("");
 
-    const [err, parsedUrl] = validateUrl(url());
-    if (err) return setError(err.message);
+  function handleUrl(url: string) {
+    const [error, parsedUrl] = validateUrl(url);
+    if (error) return setError(error.message);
 
     setIntrospect({
       parsed: true,
-      secure: parsedUrl.protocol === "https:",
+      hash: parsedUrl.hash,
       host: parsedUrl.hostname,
       path: parsedUrl.pathname,
-      hash: parsedUrl.hash,
+      secure: parsedUrl.protocol === "https:",
       query: parsedUrl.search
         ? Object.fromEntries(parsedUrl.searchParams.entries())
         : null,
     });
-    setUrl(decodeURIComponent(url()));
+
+    return setSearchParams({ url: parsedUrl.href });
+  }
+
+  function handleSubmit(event: SubmitEvent) {
+    event.preventDefault();
+    setError("");
+
+    const form = new FormData(event.target as HTMLFormElement);
+
+    const url = form.get('url');
+    if (typeof url !== 'string') return setError('No URL found in the form');
+
+    return handleUrl(url);
   };
+
+  onMount(() => {
+    if (searchParams.url) {
+      return handleUrl(searchParams.url);
+    }
+  })
 
   return (
     <div class="bg-gray-800 shadow overflow-hidden sm:rounded-lg">
@@ -51,9 +70,9 @@ const Home: Component = () => {
         <div class="relative rounded-md shadow-sm flex-1">
           <input
             id="url"
+            name="url"
             type="url"
-            onInput={(e) => setUrl(e.currentTarget.value)}
-            value={url()}
+            value={searchParams.url || ''}
             placeholder="https://google.com/"
             class="text-lg leading-6 font-medium text-gray-100 form-input border-0 block w-full sm:text-sm sm:leading-5 bg-gray-900"
           />
