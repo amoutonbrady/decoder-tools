@@ -1,5 +1,5 @@
-import { For } from "solid-js";
-import { Link, useNavigate, useLocation } from "@solidjs/router";
+import { For } from 'solid-js';
+import { Link, useNavigate, useLocation } from '@solidjs/router';
 
 function Nav() {
   const navigate = useNavigate();
@@ -7,16 +7,16 @@ function Nav() {
 
   const links = [
     {
-      slug: "/",
-      name: "URL inspector",
+      slug: '/',
+      name: 'URL inspector',
     },
     {
-      slug: "/base64-decoder",
-      name: "Base64 Decoder",
+      slug: '/base64-decoder',
+      name: 'Base64 Decoder',
     },
     {
-      slug: "/jwt-decoder",
-      name: "JWT Decoder",
+      slug: '/jwt-decoder',
+      name: 'JWT Decoder',
     },
   ];
 
@@ -29,24 +29,21 @@ function Nav() {
           onChange={(e) => navigate(e.currentTarget.value)}
           value={location.pathname}
         >
-          <For each={links}>
-            {(link) => <option value={link.slug}>{link.name}</option>}
-          </For>
+          <For each={links}>{(link) => <option value={link.slug}>{link.name}</option>}</For>
         </select>
       </div>
 
       <div class="hidden sm:block">
         <div class="border-b border-gray-200">
-          <nav class="flex -mb-px">
+          <nav class="-mb-px flex">
             <For each={links}>
               {(link) => (
                 <Link
                   href={link.slug}
-                  class="py-4 flex-1 px-1 text-center border-b-2 font-medium text-sm leading-5 focus:outline-none focus:bg-opacity-25 focus:bg-pink-900"
+                  class="flex-1 border-b-2 px-1 py-4 text-center text-sm font-medium leading-5 focus:bg-pink-900 focus:bg-opacity-25 focus:outline-none"
                   classList={{
-                    "border-pink-500 text-pink-400":
-                      location.pathname === link.slug,
-                    "border-transparent text-gray-100 hover:text-gray-200 hover:border-gray-300":
+                    'border-pink-500 text-pink-400': location.pathname === link.slug,
+                    'border-transparent text-gray-100 hover:text-gray-200 hover:border-gray-300':
                       location.pathname !== link.slug,
                   }}
                 >
@@ -59,6 +56,6 @@ function Nav() {
       </div>
     </div>
   );
-};
+}
 
 export default Nav;

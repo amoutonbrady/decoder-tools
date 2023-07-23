@@ -1,18 +1,18 @@
-import { Component, lazy } from "solid-js";
-import { Route, Routes } from "@solidjs/router";
+import { Component, lazy } from 'solid-js';
+import { Route, Routes } from '@solidjs/router';
 
-import Nav from "./components/nav";
+import Nav from './components/nav';
 
-const Home = lazy(() => import("./pages/home"));
-const JWTDecoder = lazy(() => import("./pages/jwtDecoder"));
-const Base64Decoder = lazy(() => import("./pages/base64Decoder"));
+const Home = lazy(() => import('./pages/home'));
+const JWTDecoder = lazy(() => import('./pages/jwtDecoder'));
+const Base64Decoder = lazy(() => import('./pages/base64Decoder'));
 
 const App: Component = () => {
   return (
     <>
       <Nav />
 
-      <main class="container sm:px-6 mx-auto my-12">
+      <main class="container mx-auto my-12 sm:px-6">
         <Routes>
           <Route path="/" component={Home} />
           <Route path="/base64-decoder" component={Base64Decoder} />
@@ -20,7 +20,7 @@ const App: Component = () => {
         </Routes>
       </main>
 
-      <footer class="fixed py-6 bottom-0 container w-full px-4 sm:px-6 transform flex justify-center -translate-x-1/2 left-1/2">
+      <footer class="container fixed bottom-0 left-1/2 flex w-full -translate-x-1/2 transform justify-center px-4 py-6 sm:px-6">
         <a
           href="https://github.com/amoutonbrady/url-inspector"
           target="_blank"

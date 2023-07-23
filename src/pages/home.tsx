@@ -1,6 +1,6 @@
-import { createStore } from "solid-js/store";
-import { createSignal, Show, For, onMount } from "solid-js";
-import { useSearchParams } from "@solidjs/router";
+import { createStore } from 'solid-js/store';
+import { createSignal, Show, For, onMount } from 'solid-js';
+import { useSearchParams } from '@solidjs/router';
 
 function validateUrl(url: string): [Error | null, URL | null] {
   try {
@@ -8,21 +8,20 @@ function validateUrl(url: string): [Error | null, URL | null] {
   } catch (e) {
     return [e, null];
   }
-};
+}
 
 function Home() {
   const [searchParams, setSearchParams] = useSearchParams<{ url: string }>();
 
-  const [_error, setError] = createSignal("");
+  const [_error, setError] = createSignal('');
   const [introspect, setIntrospect] = createStore({
-    hash: "",
-    host: "",
-    path: "",
+    hash: '',
+    host: '',
+    path: '',
     query: null,
     secure: true,
     parsed: false,
   });
-
 
   function handleUrl(url: string) {
     const [error, parsedUrl] = validateUrl(url);
@@ -33,10 +32,8 @@ function Home() {
       hash: parsedUrl.hash,
       host: parsedUrl.hostname,
       path: parsedUrl.pathname,
-      secure: parsedUrl.protocol === "https:",
-      query: parsedUrl.search
-        ? Object.fromEntries(parsedUrl.searchParams.entries())
-        : null,
+      secure: parsedUrl.protocol === 'https:',
+      query: parsedUrl.search ? Object.fromEntries(parsedUrl.searchParams.entries()) : null,
     });
 
     return setSearchParams({ url: parsedUrl.href });
@@ -44,7 +41,7 @@ function Home() {
 
   function handleSubmit(event: SubmitEvent) {
     event.preventDefault();
-    setError("");
+    setError('');
 
     const form = new FormData(event.target as HTMLFormElement);
 
@@ -52,36 +49,36 @@ function Home() {
     if (typeof url !== 'string') return setError('No URL found in the form');
 
     return handleUrl(url);
-  };
+  }
 
   onMount(() => {
     if (searchParams.url) {
       return handleUrl(searchParams.url);
     }
-  })
+  });
 
   return (
-    <div class="bg-gray-800 shadow overflow-hidden sm:rounded-lg">
-      <form onSubmit={handleSubmit} class="px-4 py-5 sm:px-6 flex items-center">
+    <div class="overflow-hidden bg-gray-800 shadow sm:rounded-lg">
+      <form onSubmit={handleSubmit} class="flex items-center px-4 py-5 sm:px-6">
         <label for="url" class="sr-only">
           Enter your url
         </label>
 
-        <div class="relative rounded-md shadow-sm flex-1">
+        <div class="relative flex-1 rounded-md shadow-sm">
           <input
             id="url"
             name="url"
             type="url"
             value={searchParams.url || ''}
             placeholder="https://google.com/"
-            class="text-lg leading-6 font-medium text-gray-100 form-input border-0 block w-full sm:text-sm sm:leading-5 bg-gray-900"
+            class="form-input block w-full border-0 bg-gray-900 text-lg font-medium leading-6 text-gray-100 sm:text-sm sm:leading-5"
           />
         </div>
 
-        <span class="inline-flex rounded-md shadow-sm ml-4">
+        <span class="ml-4 inline-flex rounded-md shadow-sm">
           <button
             type="submit"
-            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-pink-600 hover:bg-pink-500 focus:outline-none focus:border-pink-700 focus:shadow-outline-pink active:bg-pink-700 transition ease-in-out duration-150 uppercase"
+            class="focus:shadow-outline-pink inline-flex items-center rounded-md border border-transparent bg-pink-600 px-3 py-2 text-sm font-medium uppercase leading-4 text-white transition duration-150 ease-in-out hover:bg-pink-500 focus:border-pink-700 focus:outline-none active:bg-pink-700"
           >
             Parse url
           </button>
@@ -91,65 +88,55 @@ function Home() {
       <Show when={introspect.parsed}>
         <div class="px-4 py-5 sm:p-0">
           <dl>
-            <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 sm:py-5 sm:border-t sm:border-gray-900">
-              <dt class="text-sm leading-5 font-medium text-gray-300">
-                Is the URL secured?
-              </dt>
-              <dd class="whitespace-pre-wrap mt-1 text-sm leading-5 text-gray-100 sm:mt-0 sm:col-span-2 font-semibold">
+            <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-900 sm:px-6 sm:py-5">
+              <dt class="text-sm font-medium leading-5 text-gray-300">Is the URL secured?</dt>
+              <dd class="mt-1 whitespace-pre-wrap text-sm font-semibold leading-5 text-gray-100 sm:col-span-2 sm:mt-0">
                 <span
-                  class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium leading-4 uppercase"
+                  class="inline-flex items-center rounded px-2 py-0.5 text-xs font-medium uppercase leading-4"
                   classList={{
-                    "bg-green-800 text-green-100": introspect.secure,
-                    "bg-red-800 text-red-100": !introspect.secure,
+                    'bg-green-800 text-green-100': introspect.secure,
+                    'bg-red-800 text-red-100': !introspect.secure,
                   }}
                 >
-                  {introspect.secure ? "secured" : "not secured"}
+                  {introspect.secure ? 'secured' : 'not secured'}
                 </span>
               </dd>
             </div>
             <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-900 sm:px-6 sm:py-5">
-              <dt class="text-sm leading-5 font-medium text-gray-300">
-                Hostname
-              </dt>
-              <dd class="whitespace-pre-wrap mt-1 text-sm leading-5 text-gray-100 sm:mt-0 sm:col-span-2">
+              <dt class="text-sm font-medium leading-5 text-gray-300">Hostname</dt>
+              <dd class="mt-1 whitespace-pre-wrap text-sm leading-5 text-gray-100 sm:col-span-2 sm:mt-0">
                 {introspect.host}
               </dd>
             </div>
             <Show when={introspect.path}>
               <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-900 sm:px-6 sm:py-5">
-                <dt class="text-sm leading-5 font-medium text-gray-300">
-                  Pathname
-                </dt>
-                <dd class="whitespace-pre-wrap mt-1 text-sm leading-5 text-gray-100 sm:mt-0 sm:col-span-2">
+                <dt class="text-sm font-medium leading-5 text-gray-300">Pathname</dt>
+                <dd class="mt-1 whitespace-pre-wrap text-sm leading-5 text-gray-100 sm:col-span-2 sm:mt-0">
                   {introspect.path}
                 </dd>
               </div>
             </Show>
             <Show when={introspect.hash}>
               <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-900 sm:px-6 sm:py-5">
-                <dt class="text-sm leading-5 font-medium text-gray-300">
-                  Hash
-                </dt>
-                <dd class="whitespace-pre-wrap mt-1 text-sm leading-5 text-gray-100 sm:mt-0 sm:col-span-2">
+                <dt class="text-sm font-medium leading-5 text-gray-300">Hash</dt>
+                <dd class="mt-1 whitespace-pre-wrap text-sm leading-5 text-gray-100 sm:col-span-2 sm:mt-0">
                   {introspect.hash}
                 </dd>
               </div>
             </Show>
             <Show when={introspect.query}>
               <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-900 sm:px-6 sm:py-5">
-                <dt class="text-sm leading-5 font-medium text-gray-300">
-                  Query parameters
-                </dt>
+                <dt class="text-sm font-medium leading-5 text-gray-300">Query parameters</dt>
 
-                <dd class="whitespace-pre-wrap mt-1 text-sm leading-5 text-gray-100 sm:mt-0 sm:col-span-2">
-                  <div class="overflow-x-auto border-2 border-gray-900 align-middle inline-block min-w-full overflow-hidden sm:rounded-lg">
+                <dd class="mt-1 whitespace-pre-wrap text-sm leading-5 text-gray-100 sm:col-span-2 sm:mt-0">
+                  <div class="inline-block min-w-full overflow-hidden overflow-x-auto border-2 border-gray-900 align-middle sm:rounded-lg">
                     <table class="min-w-full">
                       <thead>
                         <tr>
-                          <th class="px-6 py-3 bg-gray-900 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider">
+                          <th class="bg-gray-900 px-6 py-3 text-left text-xs font-medium uppercase leading-4 tracking-wider text-gray-300">
                             Query
                           </th>
-                          <th class="px-6 py-3 bg-gray-900 text-left text-xs leading-4 font-medium text-gray-300 uppercase tracking-wider">
+                          <th class="bg-gray-900 px-6 py-3 text-left text-xs font-medium uppercase leading-4 tracking-wider text-gray-300">
                             Value
                           </th>
                         </tr>
@@ -158,10 +145,10 @@ function Home() {
                         <For each={Object.entries<string>(introspect.query)}>
                           {([query, value]) => (
                             <tr>
-                              <td class="px-6 py-4 whitespace-no-wrap border-t-2 border-gray-900 text-sm leading-5 font-medium text-gray-100">
+                              <td class="whitespace-no-wrap border-t-2 border-gray-900 px-6 py-4 text-sm font-medium leading-5 text-gray-100">
                                 {decodeURI(query)}
                               </td>
-                              <td class="px-6 py-4 break-all border-t-2 border-gray-900 text-sm leading-5 text-gray-300">
+                              <td class="break-all border-t-2 border-gray-900 px-6 py-4 text-sm leading-5 text-gray-300">
                                 {decodeURI(value)}
                               </td>
                             </tr>
@@ -178,6 +165,6 @@ function Home() {
       </Show>
     </div>
   );
-};
+}
 
 export default Home;

@@ -1,4 +1,4 @@
-import { createEffect, createSignal, onCleanup } from "solid-js";
+import { createEffect, createSignal, onCleanup } from 'solid-js';
 
 type Event = InputEvent & {
   target: HTMLTextAreaElement;
@@ -6,27 +6,23 @@ type Event = InputEvent & {
 };
 
 function useSyncHeight(el1: HTMLElement, el2: HTMLElement) {
-  const obs1 = new MutationObserver(
-    () => (el1.style.height = el2.offsetHeight + "px")
-  );
+  const obs1 = new MutationObserver(() => (el1.style.height = el2.offsetHeight + 'px'));
   obs1.observe(el2, {
     attributes: true,
-    attributeFilter: ["style"],
+    attributeFilter: ['style'],
   });
 
-  const obs2 = new MutationObserver(
-    () => (el2.style.height = el1.offsetHeight + "px")
-  );
+  const obs2 = new MutationObserver(() => (el2.style.height = el1.offsetHeight + 'px'));
   obs2.observe(el1, {
     attributes: true,
-    attributeFilter: ["style"],
+    attributeFilter: ['style'],
   });
 
   onCleanup(() => {
     obs1.disconnect();
     obs2.disconnect();
   });
-};
+}
 
 function Base64Decoder() {
   let encodedRef: HTMLTextAreaElement;
@@ -43,7 +39,7 @@ function Base64Decoder() {
 
     setEncoded(encoded);
     setOriginal(original);
-  };
+  }
 
   function handleEncoded(event: Event) {
     const encoded = event.target.value;
@@ -51,14 +47,14 @@ function Base64Decoder() {
 
     setEncoded(encoded);
     setOriginal(original);
-  };
+  }
 
   return (
-    <div class="mt-6 grid grid-cols-1 row-gap-6 col-gap-4 sm:grid-cols-6 space-x-2">
+    <div class="row-gap-6 col-gap-4 mt-6 grid grid-cols-1 space-x-2 sm:grid-cols-6">
       <div class="sm:col-span-3">
         <label
           for="original"
-          class="block text-sm py-2 font-medium text-center leading-5 text-gray-200"
+          class="block py-2 text-center text-sm font-medium leading-5 text-gray-200"
         >
           Original text
         </label>
@@ -68,7 +64,7 @@ function Base64Decoder() {
             rows="10"
             value={original()}
             onInput={handleOriginal}
-            class="mt-1 form-textarea font-mono text-gray-200 bg-gray-800 border-0 block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+            class="form-textarea mt-1 block w-full border-0 bg-gray-800 font-mono text-gray-200 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
             ref={originalRef}
           ></textarea>
         </div>
@@ -77,7 +73,7 @@ function Base64Decoder() {
       <div class="sm:col-span-3">
         <label
           for="encoded"
-          class="block text-sm py-2 font-medium text-center leading-5 text-gray-200"
+          class="block py-2 text-center text-sm font-medium leading-5 text-gray-200"
         >
           Base64 encoded text
         </label>
@@ -87,13 +83,13 @@ function Base64Decoder() {
             rows="10"
             value={encoded()}
             onInput={handleEncoded}
-            class="mt-1 form-textarea font-mono text-gray-200 bg-gray-800 border-0 block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+            class="form-textarea mt-1 block w-full border-0 bg-gray-800 font-mono text-gray-200 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
             ref={encodedRef}
           ></textarea>
         </div>
       </div>
     </div>
   );
-};
+}
 
 export default Base64Decoder;
