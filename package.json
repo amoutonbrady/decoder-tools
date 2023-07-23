@@ -3,13 +3,16 @@
   "description": "A url decoder app",
   "scripts": {
     "dev": "vite",
-    "build": "vite build"
+    "build": "vite build",
+    "format": "prettier --write . --ignore-path .gitignore"
   },
   "license": "MIT",
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.4",
     "autoprefixer": "^10.4.14",
     "postcss": "^8.4.27",
+    "prettier": "^3.0.0",
+    "prettier-plugin-tailwindcss": "^0.4.1",
     "tailwindcss": "^3.3.3",
     "typescript": "5.1.6",
     "vite": "^4.4.6",
