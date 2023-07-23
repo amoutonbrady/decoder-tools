@@ -54,7 +54,7 @@ function Base64Decoder() {
       <div class="sm:col-span-3">
         <label
           for="original"
-          class="block py-2 text-center text-sm font-medium leading-5 text-gray-200"
+          class="block py-2 text-center text-sm font-medium leading-5 text-neutral-200"
         >
           Original text
         </label>
@@ -64,7 +64,7 @@ function Base64Decoder() {
             rows="10"
             value={original()}
             onInput={handleOriginal}
-            class="form-textarea mt-1 block w-full border-0 bg-gray-800 font-mono text-gray-200 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+            class="form-textarea mt-1 block w-full border-0 bg-neutral-800 font-mono text-neutral-200 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
             ref={originalRef}
           ></textarea>
         </div>
@@ -73,7 +73,7 @@ function Base64Decoder() {
       <div class="sm:col-span-3">
         <label
           for="encoded"
-          class="block py-2 text-center text-sm font-medium leading-5 text-gray-200"
+          class="block py-2 text-center text-sm font-medium leading-5 text-neutral-200"
         >
           Base64 encoded text
         </label>
@@ -83,7 +83,7 @@ function Base64Decoder() {
             rows="10"
             value={encoded()}
             onInput={handleEncoded}
-            class="form-textarea mt-1 block w-full border-0 bg-gray-800 font-mono text-gray-200 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+            class="form-textarea mt-1 block w-full border-0 bg-neutral-800 font-mono text-neutral-200 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
             ref={encodedRef}
           ></textarea>
         </div>

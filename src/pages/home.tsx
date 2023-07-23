@@ -5,8 +5,8 @@ import { useSearchParams } from '@solidjs/router';
 function validateUrl(url: string): [Error | null, URL | null] {
   try {
     return [null, new URL(url)];
-  } catch (e) {
-    return [e, null];
+  } catch (error) {
+    return [error, null];
   }
 }
 
@@ -52,13 +52,13 @@ function Home() {
   }
 
   onMount(() => {
-    if (searchParams.url) {
+    if (!searchParams.url) {
       return handleUrl(searchParams.url);
     }
   });
 
   return (
-    <div class="overflow-hidden bg-gray-800 shadow sm:rounded-lg">
+    <div class="overflow-hidden bg-neutral-800 shadow sm:rounded-lg">
       <form onSubmit={handleSubmit} class="flex items-center px-4 py-5 sm:px-6">
         <label for="url" class="sr-only">
           Enter your url
@@ -71,7 +71,7 @@ function Home() {
             type="url"
             value={searchParams.url || ''}
             placeholder="https://google.com/"
-            class="form-input block w-full border-0 bg-gray-900 text-lg font-medium leading-6 text-gray-100 sm:text-sm sm:leading-5"
+            class="form-input block w-full border-0 bg-neutral-900 text-lg font-medium leading-6 text-neutral-100 sm:text-sm sm:leading-5"
           />
         </div>
 
@@ -88,9 +88,9 @@ function Home() {
       <Show when={introspect.parsed}>
         <div class="px-4 py-5 sm:p-0">
           <dl>
-            <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-900 sm:px-6 sm:py-5">
-              <dt class="text-sm font-medium leading-5 text-gray-300">Is the URL secured?</dt>
-              <dd class="mt-1 whitespace-pre-wrap text-sm font-semibold leading-5 text-gray-100 sm:col-span-2 sm:mt-0">
+            <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-neutral-900 sm:px-6 sm:py-5">
+              <dt class="text-sm font-medium leading-5 text-neutral-300">Is the URL secured?</dt>
+              <dd class="mt-1 whitespace-pre-wrap text-sm font-semibold leading-5 text-neutral-100 sm:col-span-2 sm:mt-0">
                 <span
                   class="inline-flex items-center rounded px-2 py-0.5 text-xs font-medium uppercase leading-4"
                   classList={{
@@ -102,53 +102,53 @@ function Home() {
                 </span>
               </dd>
             </div>
-            <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-900 sm:px-6 sm:py-5">
-              <dt class="text-sm font-medium leading-5 text-gray-300">Hostname</dt>
-              <dd class="mt-1 whitespace-pre-wrap text-sm leading-5 text-gray-100 sm:col-span-2 sm:mt-0">
+            <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-neutral-900 sm:px-6 sm:py-5">
+              <dt class="text-sm font-medium leading-5 text-neutral-300">Hostname</dt>
+              <dd class="mt-1 whitespace-pre-wrap text-sm leading-5 text-neutral-100 sm:col-span-2 sm:mt-0">
                 {introspect.host}
               </dd>
             </div>
             <Show when={introspect.path}>
-              <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-900 sm:px-6 sm:py-5">
-                <dt class="text-sm font-medium leading-5 text-gray-300">Pathname</dt>
-                <dd class="mt-1 whitespace-pre-wrap text-sm leading-5 text-gray-100 sm:col-span-2 sm:mt-0">
+              <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-neutral-900 sm:px-6 sm:py-5">
+                <dt class="text-sm font-medium leading-5 text-neutral-300">Pathname</dt>
+                <dd class="mt-1 whitespace-pre-wrap text-sm leading-5 text-neutral-100 sm:col-span-2 sm:mt-0">
                   {introspect.path}
                 </dd>
               </div>
             </Show>
             <Show when={introspect.hash}>
-              <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-900 sm:px-6 sm:py-5">
-                <dt class="text-sm font-medium leading-5 text-gray-300">Hash</dt>
-                <dd class="mt-1 whitespace-pre-wrap text-sm leading-5 text-gray-100 sm:col-span-2 sm:mt-0">
+              <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-neutral-900 sm:px-6 sm:py-5">
+                <dt class="text-sm font-medium leading-5 text-neutral-300">Hash</dt>
+                <dd class="mt-1 whitespace-pre-wrap text-sm leading-5 text-neutral-100 sm:col-span-2 sm:mt-0">
                   {introspect.hash}
                 </dd>
               </div>
             </Show>
             <Show when={introspect.query}>
-              <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-900 sm:px-6 sm:py-5">
-                <dt class="text-sm font-medium leading-5 text-gray-300">Query parameters</dt>
+              <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-neutral-900 sm:px-6 sm:py-5">
+                <dt class="text-sm font-medium leading-5 text-neutral-300">Query parameters</dt>
 
-                <dd class="mt-1 whitespace-pre-wrap text-sm leading-5 text-gray-100 sm:col-span-2 sm:mt-0">
-                  <div class="inline-block min-w-full overflow-hidden overflow-x-auto border-2 border-gray-900 align-middle sm:rounded-lg">
+                <dd class="mt-1 whitespace-pre-wrap text-sm leading-5 text-neutral-100 sm:col-span-2 sm:mt-0">
+                  <div class="inline-block min-w-full overflow-hidden overflow-x-auto border-2 border-neutral-900 align-middle sm:rounded-lg">
                     <table class="min-w-full">
                       <thead>
                         <tr>
-                          <th class="bg-gray-900 px-6 py-3 text-left text-xs font-medium uppercase leading-4 tracking-wider text-gray-300">
+                          <th class="bg-neutral-900 px-6 py-3 text-left text-xs font-medium uppercase leading-4 tracking-wider text-neutral-300">
                             Query
                           </th>
-                          <th class="bg-gray-900 px-6 py-3 text-left text-xs font-medium uppercase leading-4 tracking-wider text-gray-300">
+                          <th class="bg-neutral-900 px-6 py-3 text-left text-xs font-medium uppercase leading-4 tracking-wider text-neutral-300">
                             Value
                           </th>
                         </tr>
                       </thead>
-                      <tbody class="bg-gray-800">
+                      <tbody class="bg-neutral-800">
                         <For each={Object.entries<string>(introspect.query)}>
                           {([query, value]) => (
                             <tr>
-                              <td class="whitespace-no-wrap border-t-2 border-gray-900 px-6 py-4 text-sm font-medium leading-5 text-gray-100">
+                              <td class="whitespace-no-wrap border-t-2 border-neutral-900 px-6 py-4 text-sm font-medium leading-5 text-neutral-100">
                                 {decodeURI(query)}
                               </td>
-                              <td class="break-all border-t-2 border-gray-900 px-6 py-4 text-sm leading-5 text-gray-300">
+                              <td class="break-all border-t-2 border-neutral-900 px-6 py-4 text-sm leading-5 text-neutral-300">
                                 {decodeURI(value)}
                               </td>
                             </tr>
